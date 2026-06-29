@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A romantic interactive date planner experience crafted for Swornima, with beautiful image cards and responsive mobile design.">
+<meta name="theme-color" content="#0f051d">
+<title>A Story for Swornima 💖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<canvas class="sparkle-canvas" id="sparkleCanvas"></canvas>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  SCREEN 1 — INTRO                          -->
+<!-- ══════════════════════════════════════════ -->
+<div class="screen active" id="s1">
+  <div class="card">
+    <div class="bear-wrap">
+      <svg width="85" height="85" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="50" r="28" fill="#f4c2d8"/>
+        <circle cx="22" cy="28" r="14" fill="#f4c2d8"/>
+        <circle cx="58" cy="28" r="14" fill="#f4c2d8"/>
+        <circle cx="22" cy="25" r="8" fill="#e8a8c8"/>
+        <circle cx="58" cy="25" r="8" fill="#e8a8c8"/>
+        <circle cx="40" cy="50" r="18" fill="#fbdaec"/>
+        <circle cx="33" cy="46" r="4" fill="#4a3050"/>
+        <circle cx="47" cy="46" r="4" fill="#4a3050"/>
+        <circle cx="34.5" cy="44.5" r="1.5" fill="white"/>
+        <circle cx="48.5" cy="44.5" r="1.5" fill="white"/>
+        <ellipse cx="40" cy="57" rx="5" ry="3.5" fill="#e8a8c8"/>
+        <circle cx="40" cy="55.5" r="2.5" fill="#c87ba8"/>
+        <path d="M36 60 Q40 63 44 60" stroke="#c87ba8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="29" cy="53" rx="4" ry="2.5" fill="#ff9cc2" opacity="0.6"/>
+        <ellipse cx="51" cy="53" rx="4" ry="2.5" fill="#ff9cc2" opacity="0.6"/>
+        <text x="2" y="22" font-size="14">✨</text>
+        <text x="64" y="20" font-size="12">✨</text>
+      </svg>
+    </div>
+
+    <div class="step-dots" style="margin-top:25px;">
+      <div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+
+    <p class="script-title">Hey <span class="name-highlight">Swornima…</span><br>I built a tiny world just for you. 🌸</p>
+    <p class="subtitle">Take a slow breath, step inside,<br>and promise me you'll smile. 😊</p>
+
+    <div class="intro-image-card">
+      <img src="assets/images/swornima-portrait-1.jpeg" alt="Swornima portrait">
+      <p class="intro-image-label">A little portrait of you, gently placed here.</p>
+    </div>
+
+    <button class="btn-primary" onclick="go(2)">Open My Heart ✨</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  SCREEN 2 — PROPOSAL                       -->
+<!-- ══════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <div class="bear-wrap">
+      <svg width="75" height="75" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="50" r="28" fill="#f4c2d8"/>
+        <circle cx="22" cy="28" r="14" fill="#f4c2d8"/>
+        <circle cx="58" cy="28" r="14" fill="#f4c2d8"/>
+        <circle cx="22" cy="25" r="8" fill="#e8a8c8"/>
+        <circle cx="58" cy="25" r="8" fill="#e8a8c8"/>
+        <circle cx="40" cy="50" r="18" fill="#fbdaec"/>
+        <text x="27" y="52" font-size="11" text-anchor="middle">❤️</text>
+        <text x="53" y="52" font-size="11" text-anchor="middle">❤️</text>
+        <ellipse cx="40" cy="57" rx="5" ry="3.5" fill="#e8a8c8"/>
+        <circle cx="40" cy="55.5" r="2.5" fill="#c87ba8"/>
+        <path d="M36 60 Q40 64 44 60" stroke="#c87ba8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="29" cy="54" rx="4" ry="2.5" fill="#ff9cc2" opacity="0.6"/>
+        <ellipse cx="51" cy="54" rx="4" ry="2.5" fill="#ff9cc2" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="step-dots" style="margin-top:20px;">
+      <div class="dot"></div><div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+
+    <p class="script-title"><span class="name-highlight">Swornima…</span><br>Will you go out with me? 💕</p>
+    <p class="subtitle">In a world full of chaotic noise,<br>your laugh is my absolute favorite sound.</p>
+
+    <button class="btn-primary" onclick="handleYes()">Yes, completely! ❤️</button>
+    <br>
+    <button class="btn-no" id="noBtn" onmouseover="moveNoButton()" onclick="noClickFail()">No, think again 😢</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  SCREEN 2B — AFTER YES MOMENT              -->
+<!-- ══════════════════════════════════════════ -->
+<div class="screen" id="s2b">
+  <div class="card">
+    <div class="bear-wrap">
+      <svg width="75" height="75" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="50" r="28" fill="#f4c2d8"/>
+        <circle cx="22" cy="28" r="14" fill="#f4c2d8"/>
+        <circle cx="58" cy="28" r="14" fill="#f4c2d8"/>
+        <circle cx="40" cy="50" r="18" fill="#fbdaec"/>
+        <text x="27" y="52" font-size="11" text-anchor="middle">🥺</text>
+        <text x="53" y="52" font-size="11" text-anchor="middle">🥺</text>
+        <ellipse cx="40" cy="57" rx="5" ry="3.5" fill="#e8a8c8"/>
+        <circle cx="40" cy="55.5" r="2.5" fill="#c87ba8"/>
+        <ellipse cx="29" cy="54" rx="4" ry="2.5" fill="#ff9cc2" opacity="0.5"/>
+        <ellipse cx="51" cy="54" rx="4" ry="2.5" fill="#ff9cc2" opacity="0.5"/>
+        <ellipse cx="26" cy="55" rx="1.5" ry="2.5" fill="#a8d8ff" opacity="0.8"/>
+        <ellipse cx="54" cy="55" rx="1.5" ry="2.5" fill="#a8d8ff" opacity="0.8"/>
+      </svg>
+    </div>
+
+    <div style="margin-top:25px; padding: 0 5px;">
+      <p class="moment-line ml1">Wait... really? 🥺💖</p>
+      <p class="moment-line ml2">You just turned a regular day into my favorite memory.</p>
+      <p class="moment-line ml3">"I promise to value your time, protect your smile, and make sure you always feel cherished."</p>
+      <p class="moment-line ml4">Now, let's design our perfect first date together... 🌸</p>
+    </div>
+
+    <div class="moment-btn">
+      <button class="btn-primary" onclick="go(3)">Let's plan it 💫</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  SCREEN 3 — DATE PICKER                    -->
+<!-- ══════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="card">
+    <div class="step-dots">
+      <div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <p class="script-title">When can I <br><span class="name-highlight">see you?</span> 📅</p>
+    <p class="subtitle">Pick a magical day we can look forward to.</p>
+
+    <div class="date-hero-card">
+      <img src="assets/images/sunset-horizon.jpg" alt="Sunset inspiration">
+      <div class="date-hero-overlay">
+        <p>Sunset mood for our first date.</p>
+      </div>
+    </div>
+
+    <div class="date-container">
+      <input type="date" class="date-input" id="dateInput">
+    </div>
+
+    <button class="btn-primary" onclick="saveDate()">Lock it in ✨</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  SCREEN 4 — LOCATION                       -->
+<!-- ══════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <div class="step-dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div>
+      <div class="dot"></div><div class="dot"></div>
+    </div>
+    <p class="script-title">Our ideal spot <br><span class="name-highlight">would be...</span> 🌆</p>
+    <p class="subtitle">Where does your mind escape to when you want to unwind?</p>
+
+    <div class="choices">
+      <div class="choice-card" style="background-image:url('assets/images/cafe.jpg');" onclick="selectOption('location', 'Aesthetic Café ☕', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">☕</span>
+        <span>A Cozy Café</span>
+      </div>
+      <div class="choice-card" style="background-image:url('assets/images/pashupatinath-aarati.jpg');" onclick="selectOption('location', 'Pashupatinath Aarati 🙏', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">🙏</span>
+        <span>Pashupatinath Aarati</span>
+      </div>
+      <div class="choice-card" style="background-image:url('assets/images/nature.jpg');" onclick="selectOption('location', 'Peaceful Nature Walk 🌳', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">🌳</span>
+        <span>Nature Escape</span>
+      </div>
+      <div class="choice-card" style="background-image:url('assets/images/city-escape.jpg');" onclick="selectOption('location', 'Starlit Drive 🌌', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">🌌</span>
+        <span>Late Night Drive</span>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="validateLocation()">Keep Going 💖</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  SCREEN 5 — ACTIVITY                       -->
+<!-- ══════════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <div class="card">
+    <div class="step-dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </div>
+    <p class="script-title">And what are we <br><span class="name-highlight">doing?</span> 🎧</p>
+    <p class="subtitle">The perfect dynamic for us to connect.</p>
+
+    <div class="choices">
+      <div class="choice-card" style="background-image:url('assets/images/date-sunset.jpg');" onclick="selectOption('activity', 'Sunset Watching & Deep Talks 🌅', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">💬</span>
+        <span>Sunset & Deep Talks</span>
+      </div>
+      <div class="choice-card" style="background-image:url('assets/images/card-1.jpg');" onclick="selectOption('activity', 'Sharing Headphones & Music 🎧', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">🎧</span>
+        <span>Sharing Music Playlist</span>
+      </div>
+      <div class="choice-card" style="background-image:url('assets/images/card-2.jpg');" onclick="selectOption('activity', 'Holding Hands & Walking Silently 🤝', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">🤝</span>
+        <span>Walking Hand-in-Hand</span>
+      </div>
+      <div class="choice-card" style="background-image:url('assets/images/card-3.jpg');" onclick="selectOption('activity', 'Taking Million Cute Photos 📸', this)">
+        <div class="choice-card-overlay"></div>
+        <span class="emoji">📸</span>
+        <span>Taking Millions of Photos</span>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="buildSummary()">See Our Story ✨</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  SCREEN 6 — FINAL DASHBOARD                -->
+<!-- ══════════════════════════════════════════ -->
+<div class="screen" id="s6">
+  <div class="card">
+    <div class="heartbeat-ring r1"></div>
+    <div class="heartbeat-ring r2"></div>
+
+    <div class="step-dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div>
+    </div>
+
+    <p class="script-title">Our Itinerary, <br><span class="name-highlight">Swornima</span> 📝</p>
+    
+    <div class="final-container">
+      <!-- SUMMARY INFO PANEL -->
+      <div class="summary-panel">
+        <div class="featured-image-card">
+          <img src="assets/images/swornima-portrait-2.jpeg" alt="Swornima portrait 2">
+          <p class="featured-image-label">A beautiful moment captured for us.</p>
+        </div>
+        <div class="showcase-card">
+          <img src="assets/images/swornima-portrait-3.jpeg" alt="Featured Swornima portrait">
+          <p class="showcase-label">A featured hero portrait for the final moment.</p>
+        </div>
+        <div class="summary-item">
+          <div class="summary-emoji">📅</div>
+          <div>
+            <p class="summary-label">The Planned Day</p>
+            <p class="summary-value" id="finalDate">-</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-emoji">📍</div>
+          <div>
+            <p class="summary-label">The Backdrop</p>
+            <p class="summary-value" id="finalLocation">-</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-emoji">✨</div>
+          <div>
+            <p class="summary-label">The Core Memory</p>
+            <p class="summary-value" id="finalActivity">-</p>
+          </div>
+        </div>
+        <div class="final-message">
+          <p class="fmsg">"Thank you for saying yes, Swornima. I can't wait to turn this digital outline into a beautiful, warm, and laughing reality. It will be the best evening for you."</p>
+        </div>
+      </div>
+
+      <!-- PHOTO GALLERY PANEL -->
+      <div class="gallery-panel">
+        <p class="gallery-title">Memories & Inspiration 💖</p>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="assets/images/card-1.jpg" alt="Mood image 1">
+          </div>
+          <div class="gallery-item">
+            <img src="assets/images/card-2.jpg" alt="Mood image 2">
+          </div>
+          <div class="gallery-item">
+            <img src="assets/images/card-3.jpg" alt="Mood image 3">
+          </div>
+          <div class="gallery-item">
+            <img src="assets/images/card-4.jpg" alt="Mood image 4">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="final-ending">See you very soon! 💖</p>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
